@@ -7,6 +7,7 @@ app.config.from_object(DevConfig)
 db = SQLAlchemy(app)
 
 class User(db.Model):
+    __tablename__ == 'user_table_name'
     id = db.Column(db.Integer(),primary_key = True)
     username = db.Column(db.String(255))
     password = db.Column(db.String(255))
