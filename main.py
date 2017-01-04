@@ -7,6 +7,13 @@ app.config.from_object(DevConfig)
 db = SQLAlchemy(app)
 
 
+tags = db.Table(
+    db.Column('post_id',db.Integer(),db.ForeignKey('post.id')),
+    db.Column('tag_id',db.Integer(),db.ForeignKey('tag.id'))
+
+)
+
+
 class Post(db.Model):
     id = db.Column(db.Integer(),primary_key = True)
     title = db.Column(db.String(255))
@@ -45,6 +52,18 @@ class Comment(db.Model):
 
     def __repr__(self):
         return "<Comment '{}'>".format(self.text[:15])
+
+
+class Tag(db.Model):
+    id = db.Column(db.Integer(),primary_key=True)
+    title = db.Column(db.String(255))
+
+    def __init__(self,title):
+        self.title = title
+
+    def __repr__(self):
+        return "<Tag '{}'>".format(self.title)
+
 
 
 
